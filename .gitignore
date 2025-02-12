@@ -1,0 +1,39 @@
+# Node.js
+/node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# dotenv environment variables file
+.env
+
+# Logs
+logs
+*.log
+*.log.*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# build directories
+/dist
+/build
+
+# IDE specific files (ex: VS Code, WebStorm, etc.)
+.vscode/
+.idea/
+
+# Coverage directory for code coverage tools like Jest, Mocha, etc.
+/coverage
+
+# Database files (if you use SQLite or others locally)
+*.sqlite
+*.db
+
+# Temporary files from package managers
+.pnp/
+.pnp.js
+
+# Optional npm cache directory
+.npm/

@@ -1,0 +1,26 @@
+{
+  "name": "odin-inventory-application",
+  "version": "1.0.0",
+  "description": "Odin Inventory Application",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file=.env app.js",
+    "dev": "node --env-file=.env --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/king-stronger/odin-inventory-application.git"
+  },
+  "author": "Stronger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/king-stronger/odin-inventory-application/issues"
+  },
+  "homepage": "https://github.com/king-stronger/odin-inventory-application#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.2"
+  }
+}
