@@ -6,8 +6,8 @@ const port = process.env.PORT || 5000;
 //Init the app
 const app = express();
 
-//Main router
-app.use("/", routes)
+//Game routes
+app.use("/games", routes)
 
 //Listening on the port
 app.listen(port, () => {
