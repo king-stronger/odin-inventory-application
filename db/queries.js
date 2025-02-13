@@ -68,3 +68,24 @@ async function find(id, table = "games", fields = "*"){
         throw new Error("Database query failed : " + error.message );
     }
 }
+
+
+async function destroy (id, table = "games"){
+    if(!allowedTables.includes(table)){
+        throw new Error("Table not allowed");
+    }
+
+    const query = `DELETE from ${table} WHERE id=$1`;
+
+    try {
+        const result = await pool.query(query, [id]);
+        
+        if(result.rowCount === 0){
+            throw new Error(`No record found with id ${id} to delete`)
+        }
+
+        return result.rowCount;
+    } catch (error) {
+        throw new Error("Database query failed : " + error.message );
+    }
+}
