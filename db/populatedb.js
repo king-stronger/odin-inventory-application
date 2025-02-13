@@ -22,10 +22,21 @@ const SQL_CREATE_TABLES = `
         name VARCHAR(255),
         description TEXT,
         released_at DATE,
-        genre_id REFERENCES genres(id) ON DELETE SET NULL ON UPDATE CASCADE,
-        developer_id REFERENCES developers(id) ON DELETE SET NULL ON UPDATE CASCADE,
-        created_at DEFAULT NOW(),
-        updated_at DEFAULT NOW()
+        genre_id INTEGER,
+        developer_id INTEGER,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT fk_genre 
+            FOREIGN KEY (genre_id)
+            REFERENCES genres(id) 
+            ON DELETE SET NULL 
+            ON UPDATE CASCADE,
+        CONSTRAINT fk_developer 
+            FOREIGN KEY (developer_id) 
+            REFERENCES developers(id) 
+            ON DELETE SET NULL 
+            ON UPDATE CASCADE
+
     );
 `;
 
