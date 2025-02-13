@@ -110,6 +110,13 @@ async function store(data, table = "games"){
     }
 }
 
+/**
+ * 
+ * @param {Integer} id The id of the item to update
+ * @param {Object} data The new data for the update
+ * @param {String} table The table in which to execute the query
+ * @returns Returns the number of rows affected
+ */
 async function update(id, data, table = "games"){
     if(!allowedTables.includes(table)){
         throw new Error("Table not allowed");
@@ -167,4 +174,12 @@ async function destroy (id, table = "games"){
     } catch (error) {
         throw new Error("Database query failed : " + error.message );
     }
+}
+
+export {
+    all,
+    find,
+    store,
+    update,
+    destroy
 }
