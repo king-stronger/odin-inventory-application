@@ -69,7 +69,53 @@ async function find(id, table = "games", fields = "*"){
     }
 }
 
+/**
+ * 
+ * @param {Object} data The data to stored in the database 
+ * @param {*} table The table in which to execute the query
+ * @returns Returns the id of the new item stored in the database
+ */
+async function store(data, table = "games"){
+    if(!allowedTables.includes(table)){
+        throw new Error("Table not allowed");
+    }
 
+    let fields = Object.keys(data);
+
+    fields.forEach(field => {
+        if(!allowedFields[table].includes(field)){
+            throw new Error(`Field '${field}' not allowed in ${table}`);
+        }
+    });
+
+    let fieldsQuery = fields.join(",");
+    let valuesParameters = fields.map((_, index) => `$${index + 1}`).join(","); 
+
+    let query = `
+        INSERT INTO ${table} (${fieldsQuery})
+        VALUES (${valuesParameters})
+        RETURNING id;
+    `;
+
+    try {
+        const result = await pool.query(query, Object.values(data));
+
+        if(result.rowCount === 0){
+            throw new Error("No rows were inserted")
+        }
+
+        return result.rows[0].id;
+    } catch (error) {
+        throw new Error("Database query failed : " + error.message);
+    }
+}
+
+/**
+ * 
+ * @param {Integer} id The id of the item to delete
+ * @param {String} table The table in which to execute the query
+ * @returns Returns the number of rows affected
+ */
 async function destroy (id, table = "games"){
     if(!allowedTables.includes(table)){
         throw new Error("Table not allowed");
