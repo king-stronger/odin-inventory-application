@@ -1,29 +1,41 @@
+import db from "../db/queries.js";
+
 async function getAllGames (req, res, next) {
-    res.send("Log all games");
+    const games = await db.all();
+    res.json({games});
 }
 
 async function findGame (req, res, next) {
-    res.send("Create a game");
+    let id = req.params.id;
+    const game = await db.find(id)
+    res.json({game});
 }
 
 async function createGame (req, res, next) {
-    res.send("Log the selected games");
+    res.send("Create a game");
 }
 
 async function storeGame (req, res, next) {
-    res.send("Edit a game");
+    let data = req.body;
+    let result = await db.store(data);
+    res.json({result});
 }
 
 async function editGame (req, res, next) {
-    res.send("Store the game created");
+    res.send("Edit the game created");
 }
 
 async function updateGame (req, res, next) {
-    res.send("Update the game edited");
+    let data = req.body;
+    let id = req.params.id;
+    let result = await db.update(id, data);
+    res.json({result});
 }
 
 async function deleteGame (req, res, next) {
-    res.send("Delete a game");
+    let id = req.params.id;
+    let result = await db.destroy(id);
+    res.json({result});
 }
 
 export {
