@@ -110,6 +110,39 @@ async function store(data, table = "games"){
     }
 }
 
+async function update(id, data, table = "games"){
+    if(!allowedTables.includes(table)){
+        throw new Error("Table not allowed");
+    }
+
+    let fields = Object.keys(data);
+
+    fields.forEach(field => {
+        if(!allowedFields[table].includes(field)){
+            throw new Error(`Field '${field}' not allowed in ${table}`);
+        }
+    });
+
+    let fieldsQuery = fields
+        .map((field, index) => {
+            return `${field}=$${index + 1}`
+        })
+        .join(",");
+
+    let query = `
+        UPDATE ${table} 
+        SET ${fieldsQuery} 
+        WHERE id = $${fields.length + 1};
+    `;
+
+    try {
+        const result = await pool.query(query, [...Object.values(data), id]);
+        return result.rowCount;
+    } catch (error) {
+        throw new Error("Database query failed :" + error.message);
+    }
+}
+
 /**
  * 
  * @param {Integer} id The id of the item to delete
