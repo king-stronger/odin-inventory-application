@@ -176,7 +176,7 @@ async function destroy (id, table = "games"){
     }
 }
 
-export {
+export default {
     all,
     find,
     store,
