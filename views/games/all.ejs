@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game List</title>
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Game List</h1>
+        
+        <% if (games && games.length > 0) { %>
+            <ul>
+                <% games.forEach(game => { %>
+                    <li>
+                        <h3><%= game.name %></h3>
+                        <p><%= game.description %></p>
+                        <p><strong>Released on :</strong> <%= new Date(game.released_at).toLocaleDateString('en-EN') %></p>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No games found.</p>
+        <% } %>
+    </main>
+</body>
+</html>
