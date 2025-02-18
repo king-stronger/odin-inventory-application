@@ -49,7 +49,10 @@ async function updateGame (req, res, next) {
 async function deleteGame (req, res, next) {
     let id = req.params.id;
     let result = await db.destroy(id);
-    res.json({result});
+    
+    if(result){
+        res.redirect("/games/")
+    }
 }
 
 export {
