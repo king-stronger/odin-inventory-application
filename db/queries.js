@@ -63,7 +63,7 @@ async function find(id, table = "games", fields = "*"){
 
     try {
         const { rows } = await pool.query(query, [id]);
-        return rows;
+        return rows[0];
     } catch (error) {
         throw new Error("Database query failed : " + error.message );
     }
