@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h2>Game Details</h2>
+        
+        <% if (game) { %>
+            <h3><%= game.name %></h3>
+            <p><%= game.description %></p>
+            <p><strong>Released on :</strong> <%= new Date(game.released_at).toLocaleDateString('en-EN') %></p>
+        <% } else { %>
+            <p>No game found.</p>
+        <% } %>
+    </main>
+</body>
+</html>

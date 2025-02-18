@@ -13,8 +13,9 @@ async function getAllGames (req, res, next) {
 
 async function findGame (req, res, next) {
     let id = req.params.id;
-    const game = await db.find(id)
-    res.json({game});
+    const game = await db.find(id);
+
+    res.status(200).render("games/show", { game });
 }
 
 async function createGame (req, res, next) {
