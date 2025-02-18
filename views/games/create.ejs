@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Create New Game</h1>
+
+        <form action="/games/create" method="POST">
+            <label for="name">Game Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="released_at">Release Date:</label>
+            <input type="date" id="released_at" name="released_at" required>
+
+            <label for="developer_id">Developer ID:</label>
+            <input type="number" id="developer_id" name="developer_id" required>
+
+            <label for="genre_id">Genres ID:</label>
+            <input type="number" id="genre_id" name="genre_id" required>
+
+            <button type="submit">Create Game</button>
+        </form>
+    </main>
+</body>
+</html>

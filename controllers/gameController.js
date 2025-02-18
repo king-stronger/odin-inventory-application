@@ -19,13 +19,16 @@ async function findGame (req, res, next) {
 }
 
 async function createGame (req, res, next) {
-    res.send("Create a game");
+    res.render("games/create");
 }
 
 async function storeGame (req, res, next) {
     let data = req.body;
     let result = await db.store(data);
-    res.json({result});
+    
+    if(result){
+        res.redirect("/games/" + result)
+    }
 }
 
 async function editGame (req, res, next) {
