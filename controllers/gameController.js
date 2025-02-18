@@ -32,14 +32,18 @@ async function storeGame (req, res, next) {
 }
 
 async function editGame (req, res, next) {
-    res.send("Edit the game created");
+    let id = req.params.id;
+    const game = await db.find(id);
+
+    res.render("games/edit", { game });
 }
 
 async function updateGame (req, res, next) {
     let data = req.body;
     let id = req.params.id;
     let result = await db.update(id, data);
-    res.json({result});
+
+    res.json({ result })
 }
 
 async function deleteGame (req, res, next) {
