@@ -6,16 +6,25 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 
 async function getAllGames (req, res, next) {
-    const games = await db.all();
-
-    res.status(200).render("games/all", { games });
+    try {
+        const games = await db.all();
+        res.status(200).render("games/all", { games });
+    } catch (error) {
+        error.status = 500;
+        next(error);
+    }
 }
 
 async function findGame (req, res, next) {
-    let id = req.params.id;
-    const game = await db.find(id);
-
-    res.status(200).render("games/show", { game });
+    try {
+        let id = req.params.id;
+        const game = await db.find(id);
+    
+        res.status(200).render("games/show", { game });
+    } catch (error) {
+        error.status = 500;
+        next(error);
+    }
 }
 
 async function createGame (req, res, next) {
@@ -23,35 +32,67 @@ async function createGame (req, res, next) {
 }
 
 async function storeGame (req, res, next) {
-    let data = req.body;
-    let result = await db.store(data);
-    
-    if(result){
-        res.redirect("/games/" + result)
+    try {
+        let data = req.body;
+        let result = await db.store(data);
+        
+        if(result){
+            res.redirect("/games/" + result)
+        } else {
+            throw new Error("Could not store the game in the database");
+        }
+    } catch (error) {
+        error.status = 500;
+        next(error);
     }
 }
 
 async function editGame (req, res, next) {
-    let id = req.params.id;
-    const game = await db.find(id);
-
-    res.render("games/edit", { game });
+    try {
+        let id = req.params.id;
+        const game = await db.find(id);
+    
+        if(game){
+            res.render("games/edit", { game });
+        } else {
+            throw new Error("Could not store the game in the database");
+        }
+    } catch (error) {
+        error.status = 500;
+        next(error);
+    }
 }
 
 async function updateGame (req, res, next) {
-    let data = req.body;
-    let id = req.params.id;
-    let result = await db.update(id, data);
-
-    res.json({ result })
+    try {
+        let data = req.body;
+        let id = req.params.id;
+        let result = await db.update(id, data);
+    
+        if(result){
+            res.json({ result })
+        }  else {
+            throw new Error("Could not store the game in the database");
+        }
+    } catch (error) {
+        error.status = 500;
+        next(error);
+    }
 }
 
 async function deleteGame (req, res, next) {
-    let id = req.params.id;
-    let result = await db.destroy(id);
-    
-    if(result){
-        res.redirect("/games/")
+    try {
+        let id = req.params.id;
+        let result = await db.destroy(id);
+        
+        if(result){
+            res.redirect("/games/")
+        } else {
+            throw new Error("Could not delete the game in the database");
+        }
+    } catch (error) {
+        error.status = 500;
+        next(error);
     }
 }
 
