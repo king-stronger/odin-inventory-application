@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/king-stronger/odin-inventory-application#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "pg": "^8.13.2"
   }
