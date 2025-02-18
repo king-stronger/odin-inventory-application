@@ -22,6 +22,16 @@ app.set("views", path.join(dirname, "views"));
 // Game routes
 app.use("/games", routes);
 
+// Handle page not found
+app.use((req, res, next) => {
+    const error = new Error("Could not find the page you're looking for !");
+    error.status = 404;
+    next(error);
+});
+
+// Handle global errors
+app.use(errorHandler);
+
 // Listening on the port
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
